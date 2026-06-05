@@ -1,0 +1,45 @@
+## Key Learnings
+
+ I gained significant technical and professional exposure in the domain of Computer Vision and Augmented Reality. The key learnings include:
+
+## 1. MediaPipe Pose Implementation
+Developed proficiency in implementing Google's MediaPipe Pose solution for real-time human pose estimation. Acquired in-depth understanding of the 33-landmark topology, visibility metrics, and confidence score interpretation for robust skeletal tracking in dynamic environments.
+
+## 2. Computer Vision Development Lifecycle
+Executed a complete CV pipeline encompassing data acquisition via OpenCV, frame preprocessing, ML model inference, post-processing of normalized landmark coordinates, and visualization of skeletal overlays. This provided practical experience in building end-to-end AR applications.
+
+### 3. Technical Stack Proficiency
+Enhanced programming skills in Python with focused application of core libraries. Utilized OpenCV for video stream handling and image manipulation, MediaPipe for state-of-the-art pose estimation, and NumPy for efficient numerical computation and coordinate transformations.
+
+### 4. AR and Virtual Try-On Fundamentals
+Researched the technical architecture behind 2D/3D virtual try-on systems. Understood the critical role of accurate pose estimation and body segmentation as foundational components for fashion-tech applications and AI-driven recommendation engines.
+
+### 5. Software Development Best Practices
+Adopted industry-standard practices for version control using Git/GitHub, technical documentation with Markdown, modular code organization, and dependency management through requirements.txt to ensure project reproducibility and maintainability.
+
+## Challenges and Solutions
+
+### Challenge 1: Low Accuracy in Poor Lighting Conditions
+**Issue:** The MediaPipe Pose model failed to detect landmarks accurately in low-light environments or when parts of the body were occluded, resulting in missing or jittery skeleton outputs.
+
+**Solution:** Implemented image preprocessing techniques before passing frames to the detection model. Applied Contrast Limited Adaptive Histogram Equalization (CLAHE) and histogram equalization to enhance frame contrast. This improved landmark visibility and increased detection confidence by approximately 25% in suboptimal lighting.
+
+### Challenge 2: High Latency in Real-Time Video Processing
+**Issue:** The initial implementation processed video at 10-12 FPS, which was insufficient for real-time AR applications and resulted in a laggy user experience.
+
+**Solution:** Optimized the pipeline by reducing input frame resolution to 640x480 and configuring MediaPipe with `model_complexity=0` for lightweight inference. Implemented frame skipping logic to process every alternate frame. These changes improved performance to 28-30 FPS on standard hardware without significant loss in accuracy.
+
+### Challenge 3: Landmark Coordinate Mapping and Custom Visualization
+**Issue:** MediaPipe returns normalized coordinates in the range [0, 1], which created difficulties when attempting to draw custom skeletons or calculate real-world distances between joints for body measurements.
+
+**Solution:** Developed a utility function to convert normalized landmarks to absolute pixel coordinates by multiplying with frame width and height. Validated the implementation against MediaPipe's native drawing utilities to ensure accuracy. This enabled precise custom rendering and distance calculations for the body measurement module.
+
+### Challenge 4: Repository Structure and Code Maintainability
+**Issue:** The initial project repository contained all source files, results, and research documents in the root directory, making navigation difficult and failing to meet professional development standards.
+
+**Solution:** Refactored the entire repository to follow modular architecture. Segregated source code into `code/`, generated outputs into `results/skeleton_outputs/`, and literature into `research/`. Created a comprehensive README.md and requirements.txt. This structure improved code maintainability and evaluator accessibility.
+
+### Challenge 5: Dependency and Environment Conflicts
+**Issue:** MediaPipe installation failed on Python 3.12 due to lack of pre-built wheels, and there were version conflicts between dependencies.
+
+**Solution:** Standardized the development environment using Python 3.10 and created a version-pinned `requirements.txt` file specifying `mediapipe==0.10.14`, `opencv-python==4.9.0.80`, and `numpy==1.26.4`. Documented the setup process in README.md to ensure complete reproducibility.
